@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>PSLDoc3: Applying Data Science to High-throughput Protein Function Prediction</title>
+  <meta charset="utf-8">
+<META HTTP-EQUIV="expires" CONTENT="0">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{
+font-family:'Open Sans', sans-serif;
+}
+.material-icons{
+margin-right:5px;
+margin-left: 4px;
+}
+.container-fluid{
+background-image:url("/static/banner.png");
+width:100%;
+padding-bottom: 10%;
+background-size: cover;
+position:relative;
+}
+.navbar-nav{
+position: absolute;
+margin: 0;
+bottom: 0px;
+right: 0px
+}
+.navbar-nav a{
+color:#f5f5f5;
+}
+#content{
+margin-left:20px;
+margin-top:20px;
+
+}
+.index{
+margin-left:10px;
+margin-top:10px;
+}
+
+
+
+
+.fa{
+padding-right: 5px;
+ font-size: large;
+}
+li{
+border:2px solid #ffffff;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+}
+
+</style>
+</head>
+<body>
+<nav>
+<div class="container-fluid">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/psldoc3"><i class="fa fa-home"></i>Home</a></li>
+<li><a href="#"><i class="fa fa-pencil-square-o"></i>Tutorial</a></li>
+<li><a href="/history"><i class="fa fa-history"></i>History</a></li>
+<li><a href="#"><i class="fa fa-phone-square"></i>Contacts</a></li>
+</ul>
+</div>
+</nav>
+<div id="content">
+<div class="index">
+	<a href="/goto_searchpost" >If you want to analyze new protein sequence,click here.</a>
+</div>
+<div class="index">
+<i class="fa fa-folder"></i>	<a href="/result/download_file" download="" id="download">檔案連結</a>
+</div>
+<div class="index">
+<h5>{{data}}</h5>
+</div>
+</div>
+
+<script>
+		var url=location.search;
+		var getSearch="";
+		var answer="";
+		if (url.indexOf("?") != -1) {
+			getSearch = url.split("?");
+			console.log(getSearch);
+			answer=getSearch[1].split("=");
+		}
+	temp=document.getElementById("download").href;
+	document.getElementById("download").href=temp+"?id="+answer[1];
+	document.getElementById("download").download=answer[1]+".txt";
+	console.log(document.getElementById("download").href);
+
+
+
+{% if reloads %}   
+    var _PageHeight = document.documentElement.clientHeight,
+        _PageWidth = document.documentElement.clientWidth;
+    var _LoadingTop = _PageHeight > 61 ? (_PageHeight - 61) / 2 : 0,
+        _LoadingLeft = _PageWidth > 215 ? (_PageWidth - 215) / 2 : 0;
+    var _LoadingHtml =
+        '<div id="loadingDiv" ' +
+        'style="position:absolute;left:0;width:100%;top:0;background:#f3f8ff;opacity:1;filter:alpha(opacity=80);z-index:10000;' +
+        'height:' + _PageHeight + 'px;">'+
+            '<div class="loadImg" ' +
+            'style="position:absolute; cursor1: wait; width: 40%;margin: 0 auto; line-height: 57px;padding-left: 50px;'+'left:50%;top:50%; padding-right: 50px; ' +
+            'border: none; color: #696969; ' +
+            'background: #fff;">' +
+            'Wait please ...\nDo not reload this page. If you have provided your email you can close it, you will be notified by e-mail when your job is completed.\nIf you have not provided an e-mail, you can close this page and come back later to check the completion of your job. Your server history is kept in a cookie on your browser and you can access it at any moment using the History link on the main menu to check request status or retrieve a previous results.' +
+            '</div>' +
+        '</div>';
+    //css样式
+
+    //呈现loading效果
+    document.write(_LoadingHtml);
+$.getJSON("/loading", function(res){ 
+        console.log("ok");
+  	var loadingMask = document.getElementById('loadingDiv');
+        loadingMask.parentNode.removeChild(loadingMask);
+
+	 window.location.reload();  
+});
+{% endif %}
+</script>
+</body>
+</html>

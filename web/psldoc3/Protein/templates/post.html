@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PSLDoc3: Applying Data Science to High-throughput Protein Function Prediction</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).on('ready', function() {
+		$("#input-22").fileinput({
+previewFileType: "text",
+allowedFileExtensions: ["txt", "md", "ini", "text"],
+previewClass: "bg-warning"
+});
+$('.material-icons').hover(function(){
+        // Hover over code
+        var title = $(this).attr('title');
+        $(this).data('tipText', title).removeAttr('title');
+        $('<p class="tooltip"></p>')
+        .text(title)
+        .appendTo('body')
+        .fadeIn('slow');
+}, function() {
+        // Hover out code
+        $(this).attr('title', $(this).data('tipText'));
+        $('.tooltip').remove();
+}).mousemove(function(e) {
+        var mousex = e.pageX + 20; //Get X coordinates
+        var mousey = e.pageY + 10; //Get Y coordinates
+        $('.tooltip')
+        .css({ top: mousey, left: mousex })
+});
+		});
+
+</script>
+
+<style>
+.closebtn {
+	margin-left: 15px;
+color: #CBC2B2;
+       font-weight: bold;
+float: right;
+       font-size: 22px;
+       line-height: 20px;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.closebtn:hover {
+color: black;
+}
+.container-fluid{
+background-image:url("/static/banner.png");
+width:100%;
+padding-bottom: 10%;
+background-size: cover;
+position:relative;
+}
+.navbar-nav{
+position: absolute;
+margin: 0;
+bottom: 0px;
+right: 0px
+}
+.navbar-nav a{
+color:#f5f5f5;
+}
+#content{
+font-size: inherit;
+    font-weight: normal;
+    border: solid 1px #ddd;
+    padding: 4px 10px;
+    padding-bottom:500px;
+    position: relative;
+    top: 2px;
+}
+.form-group{
+width:80%;
+float:left;
+background-color: #5dace2;
+margin-left: 100px;
+padding-top: 15px;
+
+}
+#title{
+width:80%;
+float:left;
+margin-left: 100px;
+padding-top: 15px;
+}
+.input{
+    font-size: 1em;
+    float: left;
+    width:70%;
+    margin: 2px 0 15px 10px;
+}
+.form-control{
+width:100%;
+}
+body{
+font-family:'Open Sans', sans-serif;
+}
+label{
+    display: block;
+    font-weight: 500;
+    text-align: right;
+    width: 220px;
+    float: left;
+    margin-bottom: 20px;
+}
+#input_files{
+text-align:left;
+}
+.material-icons{
+margin-right:5px;
+margin-left: 4px;
+}
+.material-icons:hover{
+
+}
+h6,h5{
+display:inline;
+}
+.fa{
+padding-right: 5px;
+ font-size: large;
+}
+.addsample{
+display: block;
+    margin-right: 2%;
+
+}
+.submit{
+    margin-left: 58%;
+    width: 100px;
+    height: 50px;
+    background:rgba(255, 0, 0, 0);
+}
+.submit:hover{
+background:rgba(136, 210, 255, 0.6);
+}
+li{
+border:2px solid #ffffff;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="container-fluid">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/psldoc3"><i class="fa fa-home"></i>Home</a></li>
+<li><a href="#"><i class="fa fa-pencil-square-o"></i>Tutorial</a></li>
+<li><a href="/history"><i class="fa fa-history"></i>History</a></li>
+<li><a href="#"><i class="fa fa-phone-square"></i>Contacts</a></li>
+</ul>
+</div>
+</nav>
+{% if messages %}
+<ul class ="message">
+{%for message in messages %}
+<li class ="{{message.tags}}">{{message}}</li>
+{%endfor %}
+</ul>
+{%endif%}
+<div id="content">
+<div id="title">
+<h1>
+PSLDoc3
+<small>
+Predicted Probability
+</small>
+</h1>
+</div>
+<div class=form>
+<form enctype="multipart/form-data"  action="" name="myForm" method="POST" >
+{% csrf_token %}
+
+<div class="form-group">
+<i class="material-icons" title="Predict GO terms for a protein sequence. Please paste your sequence in fasta format.">new_releases</i>
+	<label for="comment">Sequence Input
+<small>
+	<h5 style="display:block;">Or <a id="addsample" onclick="addsample()">add sample</a></h5>
+</small>
+</label>
+<div class="input">
+<textarea value =""class="form-control" rows="5" name="comment" id="sequence"placeholder="Input your sequence" ></textarea>
+<label for="input_file" id="input_files">
+<input id ="input_file"name="input_file" type="file" accept=".fasta"  multiple style="display:none">
+<h5>Or <a>Choose file </a> <h6 id="chfile"></h6></h5>
+</label>
+</div>
+</div>
+<script>
+document.getElementById("input_file").onchange =function () {
+    document.getElementById("chfile").innerHTML = this.value;
+};
+</script>
+<div class="form-group" >
+<i class="material-icons" title="Please enter your email.">new_releases</i>
+<label for ="email">
+Your Email
+</label>
+<div class ="input">
+<input id="email" type="email" class="form-control" name="email" placeholder="example@gmail.com" required="required">
+</div>
+</div>
+
+<div class ="input">
+<input type="submit" value="Submit" class ="submit">
+</div>
+
+</form>
+</div>
+<script>
+
+var maxNum=100000;
+var minNum=1;
+var temp = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
+document.myForm.attributes["action"].value="/result?id="+temp;
+
+function addsample() {
+    document.getElementById("sequence").value = ">A0A098\nMASMAAELRPSDGGSSLHMLDSLLMMGLSSGGGVGGGGSSQSQILDSAGAAELAALLLPQHSNDPLHLMS\nTGDAALGLAGPMAAAEHHQHHPHHQHHSVPATAGFPSQTPPPPLFSNATAGAAPATRVRAAGSCGSGGVA\nGGTTSHSSEDGVFHSADPHHHHQQHLQQPQPQQQQQQQQQPQHQQQQQQQQQQQPQQPQFHHHQPQQHQA\nQQAVAATAPAAAADHLFLPPAAAGAAGQQQAGWGAATGAHLFHSDAPNRPNGPKTPTNRNGYAMKPPPPA\nAAAAVMSGHAMAASGVVAGRGGGGGGCDAEEDELTFAAAAAAEVSSDDEVMGGRGGAVMGRAAVGGFRTP\nAPAPASAGAAVNVAAAAPAAPAGTWVPKGKPAVEVSAWAPAPAAPVAAAAAAAVAVSPTVAAFAAAPVVE\nAVALVRSQQRQEQEHQLVQVAAAEQQDQQQAKRPVRSSRRRAQESQQAAAEAQQAAQQAAAAQQQQQHTG\nSGNIVGDKQGKPQGGLQQGRPVATQPSPPPPAVATAAAAAAATAPVATAPVATVATAATADTMPQRLTAV\nQQHEAYPAVVRGTLDVRKACLPRFPLVAREQAEAELQSVATAALQQAAAAPGASAAVTAAAAAAAAAATA\nAGEGKAGEGKAATARRGGRGAAEAEAAAALPAVGASGNPGLDEAMGAYVRVAALYGDEAAAAVAECESLM\nADFDNKLQLGNLATTFAAAASPTAAASGRARGGARSGGVGGGGTKRVASGANASGANSSGMSGGGGGDSA\nGAEAAAGDEMEWAPGATSVDTATGGADDEDGEEEEGQQPGGAAAAAAVAAAGGEASQLAASIAATYGSQL\nVQVAASLAQRPKVGKLPPAATQLLKGWWDDNFVWPYPSEEDKKQLGEAAALNNTQINNWFINQRKRHWHK\nHFPNRRPPSTREEAERLLRAAGAI";
+}
+</script>
+
+</body>
+</html>

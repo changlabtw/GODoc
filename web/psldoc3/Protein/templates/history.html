@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>PSLDoc3: Applying Data Science to High-throughput Protein Function Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+body{
+font-family:'Open Sans', sans-serif;
+}
+table{
+margin-left: 20px;
+    margin-top: 20px;
+
+}
+.material-icons{
+margin-right:5px;
+margin-left: 4px;
+}
+td{
+border-bottom: 1px solid #ccc;
+    padding-top: 10px;
+}
+th{
+padding-right:50px;
+}
+
+.container-fluid{
+
+background-image:url("/static/banner.png");
+width:100%;
+padding-bottom: 10%;
+background-size: cover;
+position:relative;
+}
+.navbar-nav{
+position: absolute;
+margin: 0;
+bottom: 0px;
+right: 0px
+}
+.navbar-nav a{
+color:#f5f5f5;
+}
+
+
+.fa{
+padding-right: 5px;
+ font-size: large;
+}
+
+li{
+border:2px solid #ffffff;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+}
+
+</style>
+</head>
+<body>
+<nav>
+<div class="container-fluid">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/psldoc3"><i class="fa fa-home"></i>Home</a></li>
+<li><a href="#"><i class="fa fa-pencil-square-o"></i>Tutorial</a></li>
+<li><a href="/history"><i class="fa fa-history"></i>History</a></li>
+<li><a href="#"><i class="fa fa-phone-square"></i>Contacts</a></li>
+</ul>
+</div>
+</nav>
+<table>
+                <tr>	
+		    <th>Userid</th>
+		    <th style="padding-right: 150px;">Email</th>
+                    <th>Uploadfile</th>
+                    <th>Resultfile</th>
+                    <th>Time</th>
+                </tr>
+                    {% for k in i%}
+                <tr>
+		    <td> {{k.user_name}}    </td>
+  		    <td> {{k.email}}    </td>
+		    <td><a href="/history/upload_file?user_id={{k.user_name}}&id={{k.comment}}" download="Uploadfile.txt" id="download">{{k.comment}}_Uploadfile</a> </td>
+		    <td><a href="/history/download_file?user_id={{k.user_name}}&id={{k.comment}}" download="Resultfile.txt" id="download">{{k.comment}}_Resultfile</a> </td>
+		    <td> {{k.date_time}} </td>
+                </tr>
+
+{% empty %}
+	<p> No History</p>
+{% endfor %}
+            </table>
+</body>
+</html>
