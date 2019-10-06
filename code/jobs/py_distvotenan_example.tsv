@@ -1,0 +1,3 @@
+python/dist/ana/distvoteana.py	python/dist/ana/knn_data/go_bpo_knn,python/dist/labels/go_function-P.tsv,python/dist/labels/leafonly_BPO.txt,voteres
+python/dist/ana/distvoteana.py	python/dist/ana/knn_data/go_cco_knn,python/dist/labels/go_function-C.tsv,python/dist/labels/leafonly_CCO.txt,voteres
+python/dist/ana/distvoteana.py	python/dist/ana/knn_data/go_mfo_knn,python/dist/labels/go_function-F.tsv,python/dist/labels/leafonly_MFO.txt,voteres

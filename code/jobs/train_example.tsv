@@ -1,0 +1,4 @@
+train.nf	dataset,data/brief500,output,t1
+train.nf	dataset,data/brief500,output,t2
+train.nf	tfpssm,data/brief500/tfpssm,label,data/brief500/function.tsv,output,t3
+train.nf	tfpssm,data/brief500/tfpssm,label,data/brief500/function.tsv,output,t4

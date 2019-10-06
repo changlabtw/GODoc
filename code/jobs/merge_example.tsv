@@ -1,0 +1,3 @@
+merge_tfpssm.nf	tfpssm,data/small/tfpssm/,label,data/small/function.tsv,output,t1
+merge_tfpssm.nf	tfpssm,data/small/tfpssm/,label,data/small/function.tsv,output,t2
+merge_tfpssm.nf	tfpssm,data/small/tfpssm/,label,data/small/function.tsv,output,t3

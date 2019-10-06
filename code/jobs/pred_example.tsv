@@ -1,0 +1,3 @@
+pred.nf	query,data/small/seq.fasta,model,data/brief500/model_tfpssm,modelLabel,data/brief500/function.tsv,dataset,data/small/,label,data/small/function.tsv,output,p1
+pred.nf	query,data/small/seq.fasta,model,data/brief500/model_tfpssm,modelLabel,data/brief500/function.tsv,dataset,data/small/,label,data/small/function.tsv,output,p2
+pred.nf	query,data/small/seq.fasta,model,data/brief500/model_tfpssm,modelLabel,data/brief500/function.tsv,dataset,data/small/,output,p3

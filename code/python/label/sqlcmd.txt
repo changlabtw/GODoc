@@ -1,0 +1,4 @@
+create table label (ID string, NCBI string, GO string, namespace string, code string, source string, note text);
+.separator ","
+.import function.csv label
+DELETE FROM label WHERE ID = 'ID';

@@ -1,0 +1,13 @@
+.nextflow.*
+work/
+nextflow.config
+.DS_Store
+python/label/label.db
+bin/chkparse
+bin/psipass2
+bin/psipred
+bin/hmmalign
+bin/hmmbuild
+bin/hmmpress
+bin/hmmscan
+bin/clustalo
